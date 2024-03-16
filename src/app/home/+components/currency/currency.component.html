@@ -1,0 +1,33 @@
+<div class="container">
+
+<button class="button-currency-choice" mat-button [matMenuTriggerFor]="menu">
+  kliknij, aby wybrać walutę
+</button>
+
+<mat-menu #menu="matMenu">
+  <button (click)="selectCurrency(currency)" *ngFor="let currency of currencyRates" mat-menu-item>
+  {{currency.currency}}
+</button>
+</mat-menu>
+
+
+
+
+<div class="selected-currency-container">
+  <div class="selected-currency-container-currency-detail">
+    <p>Nazwa wybranej waluty:</p>
+    <p>{{selectedCurrency?.currency}}</p>
+  </div>
+  
+  <div class="selected-currency-container-currency-detail">
+    <p>Kod wybranej waluty:</p>
+    <p>{{selectedCurrency?.code}}</p>
+  </div> 
+
+  <div class="selected-currency-container-currency-detail">
+    <p>Kurs wybranej waluty:</p>
+    <p>{{selectedCurrency?.mid}}</p>
+  </div>  
+</div>
+
+</div>

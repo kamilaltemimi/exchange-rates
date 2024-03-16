@@ -1,0 +1,21 @@
+.middle-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 600px;
+}
+
+.middle-content-container {
+  display: flex;
+  justify-content: space-between;
+  width: 50%;
+}
+
+.middle-content-button {
+  width: 300px;
+  height: 100px;
+  font-size: 18px;
+  -webkit-box-shadow: 0px 0px 10px 0px rgba(66, 68, 90, 1);
+  -moz-box-shadow: 0px 0px 10px 0px rgba(66, 68, 90, 1);
+  box-shadow: 0px 0px 10px 0px rgba(66, 68, 90, 1);
+}

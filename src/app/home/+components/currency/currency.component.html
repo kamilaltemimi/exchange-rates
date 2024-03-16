@@ -16,17 +16,20 @@
 <div class="selected-currency-container">
   <div class="selected-currency-container-currency-detail">
     <p>Nazwa wybranej waluty:</p>
-    <p>{{selectedCurrency?.currency}}</p>
+    <p *ngIf="selectedCurrency?.currency; else none">{{selectedCurrency?.currency}}</p>
+    <ng-template #none>-</ng-template>
   </div>
   
   <div class="selected-currency-container-currency-detail">
     <p>Kod wybranej waluty:</p>
-    <p>{{selectedCurrency?.code}}</p>
+    <p *ngIf="selectedCurrency?.code; else none">{{selectedCurrency?.code}}</p>
+    <ng-template #none>-</ng-template>
   </div> 
 
   <div class="selected-currency-container-currency-detail">
     <p>Kurs wybranej waluty:</p>
-    <p>{{selectedCurrency?.mid}}</p>
+    <p *ngIf="selectedCurrency?.mid; else none">{{selectedCurrency?.mid}}</p>
+    <ng-template #none>-</ng-template>
   </div>  
 </div>
 

@@ -12,7 +12,7 @@ export class AppComponent {
     private router: Router
   ){}
 
-  goHome(){
+  goHome(): void{
     this.router.navigate([''])
   }
 }

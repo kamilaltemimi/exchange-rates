@@ -10,8 +10,6 @@ import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { CurrencyService } from '../core/services/currency/currency.service';
 
-
-
 @NgModule({
   declarations: [
     HomeComponent,

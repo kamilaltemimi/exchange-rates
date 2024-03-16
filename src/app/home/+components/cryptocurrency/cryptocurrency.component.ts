@@ -21,7 +21,7 @@ export class CryptocurrencyComponent implements OnInit{
     console.log(this.cryptocurrencyRates)})
   }
 
-  selectCryptocurrency(cryptocurrency: CryptocurrencyRates){
+  selectCryptocurrency(cryptocurrency: CryptocurrencyRates): void{
     this.selectedCryptocurrency = cryptocurrency
   }
     

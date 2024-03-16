@@ -21,9 +21,8 @@ export class CurrencyComponent implements OnInit{
     this.currencyService.getCurrencyRates().subscribe(
       (data: CurrencyRate[] ) => {
       this.currencyRates = data[0]?.rates;
-
-      console.log(this.currencyRates)
-      console.log(data)})
+      }
+    )
   }
 
   selectCurrency(currency: CurrencyRate): void {

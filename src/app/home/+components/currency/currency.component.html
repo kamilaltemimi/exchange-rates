@@ -1,36 +1,39 @@
 <div class="container">
-
-<button class="button-currency-choice" mat-button [matMenuTriggerFor]="menu">
-  kliknij, aby wybrać walutę
-</button>
-
-<mat-menu #menu="matMenu">
-  <button (click)="selectCurrency(currency)" *ngFor="let currency of currencyRates" mat-menu-item>
-  {{currency.currency}}
-</button>
-</mat-menu>
+  <div class="calculator-container">
 
 
 
+    <div>
+      {{firstSelectedCurrencyAmount}} {{firstSelectedCurrency?.currency}} to w przeliczeniu 
+    </div>
 
-<div class="selected-currency-container">
-  <div class="selected-currency-container-currency-detail">
-    <p>Nazwa wybranej waluty:</p>
-    <p *ngIf="selectedCurrency?.currency; else none">{{selectedCurrency?.currency}}</p>
-    <ng-template #none>-</ng-template>
-  </div>
+    <div>
+      {{secondSelectedCurrencyAmount}} {{secondSelectedCurrency?.currency}}
+    </div>
+
+    <div>
+      {{date | date: 'H:mm - dd/MMM/yyyy'}}
+    </div>
+
+    <div>
+      <form class="example-form">
+        <div>
+          <mat-autocomplete #firstAuto="matAutocomplete">
+            <mat-option (click)="selectFirstCurrency(currency)" *ngFor="let currency of currencyRates" [value]="currency.currency">{{ currency.currency }}</mat-option>
+          </mat-autocomplete>
+          <input class="input-currency-name" type="text" placeholder="Search for a currency" [matAutocomplete]="firstAuto">
+          <input class="input-currency-amount" (input)="updateFirstCurrencyAmount()" [(ngModel)]="firstSelectedCurrencyAmount" type="number" placeholder="amount" name="firstCurrency">
+        </div>
   
-  <div class="selected-currency-container-currency-detail">
-    <p>Kod wybranej waluty:</p>
-    <p *ngIf="selectedCurrency?.code; else none">{{selectedCurrency?.code}}</p>
-    <ng-template #none>-</ng-template>
-  </div> 
-
-  <div class="selected-currency-container-currency-detail">
-    <p>Kurs wybranej waluty:</p>
-    <p *ngIf="selectedCurrency?.mid; else none">{{selectedCurrency?.mid}}</p>
-    <ng-template #none>-</ng-template>
-  </div>  
-</div>
-
-</div>
+        <div>
+          <mat-autocomplete #secondAuto="matAutocomplete">
+            <mat-option (click)="selectSecondCurrency(currency)" *ngFor="let currency of currencyRates" [value]="currency.currency">{{ currency.currency }}</mat-option>
+          </mat-autocomplete>
+          <input class="input-currency-name" type="text" placeholder="Search for a currency" [matAutocomplete]="secondAuto">
+          <input class="input-currency-amount" (input)="updateSecondCurrencyAmount()" [(ngModel)]="secondSelectedCurrencyAmount" type="number" placeholder="amount" name="secondCurrency">
+        </div>
+      </form>
+  
+    </div>
+  </div>
+  </div>

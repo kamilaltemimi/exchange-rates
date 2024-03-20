@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CurrencyService } from 'src/app/core/services/currency/currency.service';
 import { CurrencyRate } from 'src/app/core/interfaces/currency-rate';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-currency',
@@ -9,9 +10,15 @@ import { CurrencyRate } from 'src/app/core/interfaces/currency-rate';
 })
 export class CurrencyComponent implements OnInit{
 
+  control = new FormControl('');
+  date = new Date()
   currencyRates: CurrencyRate[] = []
-  selectedCurrency: CurrencyRate | undefined 
 
+  firstSelectedCurrency: CurrencyRate | undefined 
+  firstSelectedCurrencyAmount: number | undefined
+  
+  secondSelectedCurrency: CurrencyRate | undefined
+  secondSelectedCurrencyAmount: number | undefined
 
   constructor(
     private currencyService: CurrencyService
@@ -25,8 +32,36 @@ export class CurrencyComponent implements OnInit{
     )
   }
 
-  selectCurrency(currency: CurrencyRate): void {
-    this.selectedCurrency = currency
+  selectFirstCurrency(currency: CurrencyRate): void{
+    this.firstSelectedCurrency = currency
+    this.updateFirstCurrencyAmount()
+    this.date = new Date()
   }
+
+  selectSecondCurrency(currency: CurrencyRate): void{
+    this.secondSelectedCurrency = currency
+    this.updateSecondCurrencyAmount()
+    this.date = new Date()
+  }
+  
+  updateFirstCurrencyAmount(): void{
+    if (this.firstSelectedCurrency && this.secondSelectedCurrency && this.firstSelectedCurrencyAmount)
+      this.secondSelectedCurrencyAmount = this.firstSelectedCurrency?.mid * this.firstSelectedCurrencyAmount / this.secondSelectedCurrency?.mid
+      this.date = new Date()
+    if (this.firstSelectedCurrencyAmount === 0) {
+      this.secondSelectedCurrencyAmount = 0;
+    }
+  }
+
+  updateSecondCurrencyAmount(): void{
+    if (this.secondSelectedCurrency && this.firstSelectedCurrency && this.secondSelectedCurrencyAmount)
+      this.firstSelectedCurrencyAmount = this.secondSelectedCurrencyAmount * this.secondSelectedCurrency?.mid / this.firstSelectedCurrency?.mid
+      this.date = new Date()
+    if (this.secondSelectedCurrencyAmount === 0) {
+      this.firstSelectedCurrencyAmount = 0;
+    }
+      
+  }
+
 
 }

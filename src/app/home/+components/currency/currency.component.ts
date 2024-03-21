@@ -12,6 +12,7 @@ export class CurrencyComponent implements OnInit{
 
   control = new FormControl('');
   date = new Date()
+  
   currencyRates: CurrencyRate[] = []
 
   firstSelectedCurrency: CurrencyRate | undefined 
@@ -46,21 +47,20 @@ export class CurrencyComponent implements OnInit{
   
   updateFirstCurrencyAmount(): void{
     if (this.firstSelectedCurrency && this.secondSelectedCurrency && this.firstSelectedCurrencyAmount)
-      this.secondSelectedCurrencyAmount = this.firstSelectedCurrency?.mid * this.firstSelectedCurrencyAmount / this.secondSelectedCurrency?.mid
-      this.date = new Date()
+      this.secondSelectedCurrencyAmount = parseFloat((this.firstSelectedCurrency?.mid * this.firstSelectedCurrencyAmount / this.secondSelectedCurrency?.mid).toFixed(2));
     if (this.firstSelectedCurrencyAmount === 0) {
       this.secondSelectedCurrencyAmount = 0;
     }
+    this.date = new Date()
   }
 
   updateSecondCurrencyAmount(): void{
     if (this.secondSelectedCurrency && this.firstSelectedCurrency && this.secondSelectedCurrencyAmount)
-      this.firstSelectedCurrencyAmount = this.secondSelectedCurrencyAmount * this.secondSelectedCurrency?.mid / this.firstSelectedCurrency?.mid
-      this.date = new Date()
+      this.firstSelectedCurrencyAmount = parseFloat((this.secondSelectedCurrencyAmount * this.secondSelectedCurrency?.mid / this.firstSelectedCurrency?.mid).toFixed(2))
     if (this.secondSelectedCurrencyAmount === 0) {
       this.firstSelectedCurrencyAmount = 0;
     }
-      
+    this.date = new Date()
   }
 
 

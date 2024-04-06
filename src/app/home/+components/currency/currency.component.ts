@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CurrencyService } from 'src/app/core/services/currency/currency.service';
-import { CurrencyRate } from 'src/app/core/interfaces/currency-rate';
-import { FormControl } from '@angular/forms';
+import { Rate } from 'src/app/core/interfaces/rate';
+import { Rates } from 'src/app/core/interfaces/rates';
+
 
 @Component({
   selector: 'app-currency',
@@ -10,15 +11,13 @@ import { FormControl } from '@angular/forms';
 })
 export class CurrencyComponent implements OnInit{
 
-  control = new FormControl('');
   date = new Date()
-  
-  currencyRates: CurrencyRate[] = []
+  currencyRates: Rate[] = []
 
-  firstSelectedCurrency: CurrencyRate | undefined 
+  firstSelectedCurrency: Rate | undefined 
   firstSelectedCurrencyAmount: number | undefined
   
-  secondSelectedCurrency: CurrencyRate | undefined
+  secondSelectedCurrency: Rate | undefined
   secondSelectedCurrencyAmount: number | undefined
 
   constructor(
@@ -27,19 +26,19 @@ export class CurrencyComponent implements OnInit{
 
   ngOnInit(): void {
     this.currencyService.getCurrencyRates().subscribe(
-      (data: CurrencyRate[] ) => {
-      this.currencyRates = data[0]?.rates;
+      (data: Rates) => {
+      this.currencyRates = data.rates
       }
     )
   }
 
-  selectFirstCurrency(currency: CurrencyRate): void{
+  selectFirstCurrency(currency: Rate): void{
     this.firstSelectedCurrency = currency
     this.updateFirstCurrencyAmount()
     this.date = new Date()
   }
 
-  selectSecondCurrency(currency: CurrencyRate): void{
+  selectSecondCurrency(currency: Rate): void{
     this.secondSelectedCurrency = currency
     this.updateSecondCurrencyAmount()
     this.date = new Date()

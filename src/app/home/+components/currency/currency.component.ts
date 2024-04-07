@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CurrencyService } from 'src/app/core/services/currency/currency.service';
-import { Rate } from 'src/app/core/interfaces/rate';
-import { Rates } from 'src/app/core/interfaces/rates';
-
+import { CurrencyRate } from 'src/app/core/interfaces/currency-rate';
 
 @Component({
   selector: 'app-currency',
@@ -12,12 +10,12 @@ import { Rates } from 'src/app/core/interfaces/rates';
 export class CurrencyComponent implements OnInit{
 
   date = new Date()
-  currencyRates: Rate[] = []
+  currencyRates: CurrencyRate[] = []
 
-  firstSelectedCurrency: Rate | undefined 
+  firstSelectedCurrency: CurrencyRate | undefined 
   firstSelectedCurrencyAmount: number | undefined
   
-  secondSelectedCurrency: Rate | undefined
+  secondSelectedCurrency: CurrencyRate | undefined
   secondSelectedCurrencyAmount: number | undefined
 
   constructor(
@@ -26,19 +24,19 @@ export class CurrencyComponent implements OnInit{
 
   ngOnInit(): void {
     this.currencyService.getCurrencyRates().subscribe(
-      (data: Rates) => {
-      this.currencyRates = data.rates
+      (data: CurrencyRate[]) => {
+      this.currencyRates = data[0]?.rates;
       }
     )
   }
 
-  selectFirstCurrency(currency: Rate): void{
+  selectFirstCurrency(currency: CurrencyRate): void{
     this.firstSelectedCurrency = currency
     this.updateFirstCurrencyAmount()
     this.date = new Date()
   }
 
-  selectSecondCurrency(currency: Rate): void{
+  selectSecondCurrency(currency: CurrencyRate): void{
     this.secondSelectedCurrency = currency
     this.updateSecondCurrencyAmount()
     this.date = new Date()
